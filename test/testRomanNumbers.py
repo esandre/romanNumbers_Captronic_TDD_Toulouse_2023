@@ -32,6 +32,14 @@ class MyTestCase(unittest.TestCase):
         # ALORS on obtient "V"
         self.assertEqual("V", nombres_romains)
 
+    def test_six(self):
+        # ETANT DONNE 6
+        chiffre = 6
+        # QUAND on le convertit en nombres romains
+        nombres_romains = ConvertisseurNombresRomains.convertir(chiffre)
+        # ALORS on obtient "VI"
+        self.assertEqual("VI", nombres_romains)
+
 
 if __name__ == '__main__':
     unittest.main()

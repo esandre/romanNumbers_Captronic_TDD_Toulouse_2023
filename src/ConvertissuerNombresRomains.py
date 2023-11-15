@@ -5,4 +5,6 @@ class ConvertisseurNombresRomains:
             return "IV"
         elif chiffre_arabe == 5:
             return "V"
+        elif chiffre_arabe == 6:
+            return "VI"
         return "I" * chiffre_arabe
