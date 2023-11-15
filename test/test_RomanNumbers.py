@@ -24,12 +24,13 @@ class MyTestCase(unittest.TestCase):
         # ALORS on obtient "IV"
         self.assertEqual("IV", nombres_romains)
 
-    @parameterized.expand([[5], [6], [7]])
+    @parameterized.expand([[5], [6], [7], [8]])
     def test_five_plus_unit(self, chiffre):
         # ETANT DONNE chiffre compris entre 5 et 7
         # QUAND on le convertit en nombres romains
         nombres_romains = ConvertisseurNombresRomains.convertir(chiffre)
-        # ALORS on obtient "V + I * chiifre - 5"
+
+        # ALORS on obtient "V" suivi de <chiffre> - 5 fois "I"
         attendu = "V" + "I" * (chiffre - 5)
         self.assertEqual(attendu, nombres_romains)
 
