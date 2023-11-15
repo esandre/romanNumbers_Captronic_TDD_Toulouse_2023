@@ -1,6 +1,8 @@
 class ConvertisseurNombresRomains:
     @classmethod
     def convertir(cls, chiffre_arabe):
+        if chiffre_arabe == 10:
+            return "X"
         if chiffre_arabe == 9:
             return "IX"
         elif chiffre_arabe >= 5:
