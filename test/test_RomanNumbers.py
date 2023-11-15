@@ -27,21 +27,25 @@ class MyTestCase(unittest.TestCase):
         attendu = "I" + ConvertisseurNombresRomains.convertir(chiffre + 1)
         self.assertEqual(attendu, nombres_romains)
 
-    @parameterized.expand([
-        ["V", 5, 0], ["V", 5, 1], ["V", 5, 2], ["V", 5, 3],
-        ["X", 10, 0], ["X", 10, 1], ["X", 10, 2], ["X", 10, 3],
-    ])
-    def test_quinte_plus_unit(self, symbole, valeur, delta):
-        # ETANT DONNE un symbole romain ayant pour valeur <valeur>
-        # ET un <chiffre> le dépassant de 1 à 3
-        chiffre = valeur + delta
+    def cases(self):
+        symbols = [["V", 5], ["X", 10]]
+        for symbol in symbols:
+            for delta in [0, 1, 2, 3]:
+                yield symbol[0], symbol[1], delta
 
-        # QUAND on le convertit en nombres romains
-        nombres_romains = ConvertisseurNombresRomains.convertir(chiffre)
+    def test_quinte_plus_unit(self):
+        for symbole, valeur, delta in self.cases():
+            with self.subTest(symbole + str(delta)):
+                # ETANT DONNE un symbole romain ayant pour valeur <valeur>
+                # ET un <chiffre> le dépassant de 1 à 3
+                chiffre = valeur + delta
 
-        # ALORS on obtient le symbole suivi de "I" répété <chiffre - valeur> fois
-        attendu = symbole + "I" * (chiffre - valeur)
-        self.assertEqual(attendu, nombres_romains)
+                # QUAND on le convertit en nombres romains
+                nombres_romains = ConvertisseurNombresRomains.convertir(chiffre)
+
+                # ALORS on obtient le symbole suivi de "I" répété <chiffre - valeur> fois
+                attendu = symbole + "I" * (chiffre - valeur)
+                self.assertEqual(attendu, nombres_romains)
 
     def test_quatorze(self):
         # ETANT DONNE le chiffre 14
