@@ -36,15 +36,16 @@ class MyTestCase(unittest.TestCase):
         attendu = "V" + "I" * (chiffre - 5)
         self.assertEqual(attendu, nombres_romains)
 
-    def test_ten(self):
-        # ETANT DONNE le chiffre 10
-        chiffre = 10
+    @parameterized.expand([[10], [11], [12], [13]])
+    def test_ten_plus_unit(self, chiffre):
+        # ETANT DONNE un <chiffre> compris entre 10 et 13
 
         # QUAND on le convertit en nombres romains
         nombres_romains = ConvertisseurNombresRomains.convertir(chiffre)
 
-        # ALORS on obtient "X"
-        self.assertEqual("X", nombres_romains)
+        # ALORS on obtient "X" + "I" répété <chiffre - 10> fois
+        attendu = "X" + "I" * (chiffre - 10)
+        self.assertEqual(attendu, nombres_romains)
 
 
 if __name__ == '__main__':
