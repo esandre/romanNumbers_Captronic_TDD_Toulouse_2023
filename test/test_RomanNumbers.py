@@ -2,7 +2,7 @@ import unittest
 
 from parameterized import parameterized
 
-from ConvertissuerNombresRomains import ConvertisseurNombresRomains
+from ConvertisseurNombresRomains import ConvertisseurNombresRomains
 
 
 class MyTestCase(unittest.TestCase):
@@ -16,13 +16,15 @@ class MyTestCase(unittest.TestCase):
         attendu = "I" * chiffre
         self.assertEqual(attendu, nombres_romains)
 
-    def test_four(self):
-        # ETANT DONNE 4
-        chiffre = 4
+    @parameterized.expand([[4], [9]])
+    def test_unite_avant_quinte(self, chiffre):
+        # ETANT DONNE un <chiffre> dont le suivant est multiple de 5
         # QUAND on le convertit en nombres romains
         nombres_romains = ConvertisseurNombresRomains.convertir(chiffre)
-        # ALORS on obtient "IV"
-        self.assertEqual("IV", nombres_romains)
+
+        # ALORS on obtient la représentation du suivante précédée de "I"
+        attendu = "I" + ConvertisseurNombresRomains.convertir(chiffre + 1)
+        self.assertEqual(attendu, nombres_romains)
 
     @parameterized.expand([[5], [6], [7], [8]])
     def test_five_plus_unit(self, chiffre):
@@ -32,16 +34,6 @@ class MyTestCase(unittest.TestCase):
 
         # ALORS on obtient "V" suivi de <chiffre> - 5 fois "I"
         attendu = "V" + "I" * (chiffre - 5)
-        self.assertEqual(attendu, nombres_romains)
-
-    def test_neuf(self):
-        # ETANT DONNE chiffre 9
-        chiffre = 9
-        # QUAND on le convertit en nombres romains
-        nombres_romains = ConvertisseurNombresRomains.convertir(chiffre)
-
-        # ALORS on obtient "IX"
-        attendu = "IX"
         self.assertEqual(attendu, nombres_romains)
 
     def test_ten(self):
