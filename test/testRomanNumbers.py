@@ -23,7 +23,15 @@ class MyTestCase(unittest.TestCase):
         nombres_romains = ConvertisseurNombresRomains.convertir(chiffre)
         # ALORS on obtient "IV"
         self.assertEqual("IV", nombres_romains)
-        
+
+    def test_five(self):
+        # ETANT DONNE 5
+        chiffre = 5
+        # QUAND on le convertit en nombres romains
+        nombres_romains = ConvertisseurNombresRomains.convertir(chiffre)
+        # ALORS on obtient "V"
+        self.assertEqual("V", nombres_romains)
+
 
 if __name__ == '__main__':
     unittest.main()
