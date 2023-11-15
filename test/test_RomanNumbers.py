@@ -1,3 +1,4 @@
+import itertools
 import unittest
 
 from parameterized import parameterized
@@ -41,6 +42,16 @@ class MyTestCase(unittest.TestCase):
         # ALORS on obtient le symbole suivi de "I" répété <chiffre - valeur> fois
         attendu = symbole + "I" * (chiffre - valeur)
         self.assertEqual(attendu, nombres_romains)
+
+    def test_quatorze(self):
+        # ETANT DONNE le chiffre 14
+        chiffre = 14
+
+        # QUAND on le convertit en nombres romains
+        nombres_romains = ConvertisseurNombresRomains.convertir(chiffre)
+
+        # ALORS on obtient "XIV"
+        self.assertEqual("XIV", nombres_romains)
 
 
 if __name__ == '__main__':
